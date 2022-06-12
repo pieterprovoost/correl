@@ -20,6 +20,7 @@ describe("lm", () => {
     assert.closeTo(result.slope, 0.2, 0.000001);
     assert.closeTo(result.intercept, 0.4, 0.000001);
     assert.closeTo(result.df, 298, 0.000001);
+    assert.closeTo(result.rs, 0.04, 0.01);
     assert.closeTo(result.rse, 0.9814, 0.0001);
     assert.closeTo(result.slope_se, 0.05676, 0.00001);
     assert.closeTo(result.slope_t, 3.524, 0.001);

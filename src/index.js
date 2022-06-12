@@ -31,6 +31,7 @@ export function lm(x, y) {
   const dx = x.map(xe => xe - mx);
   const dy = y.map(ye => ye - my);
   const dxsq = dx.map(xe => Math.pow(xe, 2)).reduce((sum, value) => sum + value, 0);
+  const dysq = dy.map(ye => Math.pow(ye, 2)).reduce((sum, value) => sum + value, 0);
   const numerator = dx.map((element, i) => dx[i] * dy[i]).reduce((sum, value) => sum + value, 0);
   const slope = numerator / dxsq;
   const intercept = my - slope * mx;
@@ -43,5 +44,6 @@ export function lm(x, y) {
   const intercept_se = rse / Math.sqrt(dxsq) / Math.sqrt(n) * Math.sqrt(xss);
   const intercept_t = intercept / intercept_se;
 	const intercept_p = 2 * (1 - tdist.cdf(Math.abs(intercept_t), df));
-  return { slope, intercept, df, rse, slope_se, slope_t, slope_p, intercept_se, intercept_t, intercept_p };
+  const rs = Math.pow(numerator, 2) / (dxsq * dysq);
+  return { slope, intercept, df, rs, rse, slope_se, slope_t, slope_p, intercept_se, intercept_t, intercept_p };
 }
